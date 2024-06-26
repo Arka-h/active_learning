@@ -17,13 +17,13 @@ import torch
 import torch.distributed as dist
 import torch.multiprocessing as mp
 
-from . import config
-from .dataset.ih26m_dataset import InterHand26MDataset
-from .dataset.panoptic_dataset import CMUPanopticDataset
-from .pose_estimators.hrnet import PoseHighResolutionNet
-from .pose_estimators.pose_resnet import PoseResNet
-from .strategy import ActiveLearningStrategy
-from .utils import get_logger
+import config
+from dataset.ih26m_dataset import InterHand26MDataset
+from dataset.panoptic_dataset import CMUPanopticDataset
+from pose_estimators.hrnet import PoseHighResolutionNet
+from pose_estimators.pose_resnet import PoseResNet
+from strategy import ActiveLearningStrategy
+from utils import get_logger
 
 
 def main(rank, cfg):
@@ -36,6 +36,7 @@ def main(rank, cfg):
     if cfg.EXPR_TYPE == "AL" or cfg.EXPR_TYPE == "SAL":
         if rank == 0:
             strategy.prepare_al_experiments()
+        print("CURRENT_ITER", cfg.AL.CURRENT_ITER)
         if cfg.AL.CURRENT_ITER == 0:
             if cfg.AL.PREVIOUS_AL_LOG_DIR != "":
                 if rank == 0:
@@ -208,7 +209,7 @@ def prepare_output(cfg, eval_dict):
 
 if __name__ == "__main__":
     argparser = argparse.ArgumentParser()
-    argparse.add_argument("--config_file", help="Path to experiment config file.", default="")
+    argparser.add_argument("--config_file", help="Path to experiment config file.", default="")
     args = argparser.parse_args()
     config_file = args.config_file
     cfg = config.get_default_configs()

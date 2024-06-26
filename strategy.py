@@ -14,7 +14,7 @@ from heapq import nlargest
 
 import numpy as np
 import torch
-from torch.utils.tensorboard import summary_writer
+from torch.utils.tensorboard import SummaryWriter
 from iopath.common.file_io import PathManager
 from skimage.feature import peak_local_max
 from sklearn.cluster import KMeans
@@ -270,7 +270,7 @@ class ActiveLearningStrategy:
             self.al_cfg.LOG_DIR, self.al_cfg.EXPR_NAME)
         if not self._pathmgr.isdir(checkpoints_dir):
             self._pathmgr.mkdirs(checkpoints_dir)
-        self.al_writer = summary_writer(
+        self.al_writer = SummaryWriter(
             log_dir=os.path.join(self.al_cfg.LOG_DIR,
                                  self.al_cfg.EXPR_NAME, "AL")
         )
@@ -675,7 +675,7 @@ class ActiveLearningStrategy:
             self._logger.warning(
                 "TensorBoard directory already exists. Double check: %s." % log_dir
             )
-        writer = summary_writer(log_dir=log_dir)
+        writer = SummaryWriter(log_dir=log_dir)
         return checkpoints_dir, writer
 
     def _save_checkpoints(
