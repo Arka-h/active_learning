@@ -2,6 +2,12 @@
 
 Official implementation of the WACV 2023 paper.
 
+### How to run
+
+`$ python3 workflow.py --config_file ./experiments/sample-config.yaml`
+
+-------
+
 ```bibtex
 @inproceedings{feng2023rethinking,
   title={Rethinking the Data Annotation Process for Multi-View 3D Pose Estimation With Active Learning and Self-Training},

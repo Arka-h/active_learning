@@ -20,7 +20,7 @@ _C.EXPR_NAME = "EXPR"
 # CLUSTER           - Cluster the dataset based on either "hardness" or "pose".
 # SAL               - Self Active Learning Full Pipeline.
 _C.EXPR_TYPE = "SUPERVISED"
-_C.LOG_DIR = "manifold://oculus-nimble-tensorboard/tree/fung/exprs"
+_C.LOG_DIR = "./logs"
 _C.COMMENT = "N/A"
 _C.RANDOM_SEED = 1307
 
